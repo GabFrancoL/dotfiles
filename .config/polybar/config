@@ -82,7 +82,7 @@ label = %title:0:30:...%
 
 [module/openweathermap-simple]
 type = custom/script
-exec = /home/gabriel/.config/polybar/scripts/openweathermap-simple.sh
+exec = /home/user/.config/polybar/scripts/openweathermap-simple.sh
 interval = 600
 format-prefix = "  "
 format-prefix-background = #689d6a

@@ -5,15 +5,15 @@ import os.path
 
 #path to polynews script
 
-save_path = '/home/gabriel/.config/polybar/scripts'
+save_path = '/home/user/.config/polybar/scripts'
 
 #get your api key at https://newsapi.org/
 
-api_key = "" #add you newsapi key
+api_key = "" 
 
 #find sources & country codes at https://newsapi.org/sources
 
-sources = ""
+sources = "" 
 country = ""
 
 try:
@@ -32,5 +32,5 @@ try:
     
  
 except requests.exceptions.RequestException as e:
-    print ('Algo deu errado!')
+    print (' Algo deu errado! ')
 

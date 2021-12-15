@@ -161,7 +161,7 @@ bindsym $mod+r mode "Redimensionar"
 exec_always bash ~/.config/polybar/launch.sh
 
 # Compositor
-exec_always picom --config /home/gabriel/.config/picom/picom.conf --experimental-backends
+exec_always picom --config /home/user/.config/picom/picom.conf --experimental-backends
 
 # Screen DPI
 exec_always xrandr --dpi 96
