@@ -37,13 +37,10 @@ bindsym $mod+Return exec alacritty
 bindsym $mod+Shift+q kill
 
 # Start dmenu
-# bindsym $mod+d exec --no-startup-id dmenu_run -b -fn 'Fira Code 11' -nb '#282a36' -nf '#f8f8f2' -sf '#f8f8f2' -sb '#bd93f9'
+bindsym $mod+d exec --no-startup-id dmenu_run -b -fn 'Fira Code 11' -nb '#282828' -nf '#ebdbb2' -sf '#ebdbb2' -sb '#504945'
 
 # Start rofi
-bindsym $mod+d exec rofi -show drun
-
-# Start jgmenu
-bindsym $mod+m exec jgmenu_run
+# bindsym $mod+d exec rofi -show drun
 
 # Change focus
 bindsym $mod+j focus left
@@ -158,23 +155,24 @@ bindsym $mod+r mode "Redimensionar"
 # }
 
 # Polybar
-exec_always bash ~/.config/polybar/launch.sh
+exec_always --no-startup-id bash ~/.config/polybar/launch.sh
 
 # Compositor
-exec_always picom --config /home/user/.config/picom/picom.conf --experimental-backends
+exec_always --no-startup-id picom --config /home/gabriel/.config/picom/picom.conf --experimental-backends
 
 # Screen DPI
-exec_always xrandr --dpi 96
+exec_always --no-startup-id xrandr --rate 60 --dpi 96
 
 # Keyboard layout
-exec_always setxkbmap br
+exec_always --no-startup-id setxkbmap br
 
 # Gaps and borders
-smart_gaps on
-smart_borders on
-gaps inner 24
-gaps outer 4
+# smart_gaps on
+# smart_borders on
+gaps inner 18
+gaps outer 2
 for_window [class=".*"] border pixel 4
+border_radius 4
 
 # Apps
 bindsym $mod+Shift+w exec firefox
@@ -183,7 +181,7 @@ bindsym Print exec flameshot gui
 bindsym $mod+Shift+p exec firefox --private-window
 
 # Wallpapers
-exec_always nitrogen --restore
+exec_always --no-startup-id nitrogen --restore
 
 # Border colors
 set $bgc #928374
@@ -215,3 +213,6 @@ exec_always --no-startup-id rclone mount Drive:Backup/ ~/Drive/
 
 # Polkit
 exec_always --no-startup-id /usr/bin/lxpolkit
+
+# Autotiling
+exec_always --no-startup-id autotiling

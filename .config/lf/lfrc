@@ -58,9 +58,10 @@ cmd trash %set -f; mv $fx ~/.trash
 cmd delete ${{
     set -f
     printf "$fx\n"
-    printf "Deseja realmente excluir?[s/n]"
+    printf "Deseja realmente excluir?[S/n]"
     read ans
     [ $ans = "s" ] && rm -rf $fx
+    [ $ans = "S" ] && rm -rf $fx
 }}
 
 # use '<delete>' key for either 'trash' or 'delete' command

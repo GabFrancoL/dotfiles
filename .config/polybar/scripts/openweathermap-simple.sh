@@ -41,8 +41,8 @@ get_icon() {
     echo $icon
 }
 
-KEY="" #add your openweather api key
-CITY="" #add your city followed by country
+KEY="5ccc7773e6835194124471c1c88e65e6" #add your openweather api key
+CITY="Viçosa,BR" #add your city followed by country
 UNITS="metric"
 SYMBOL="°"
 

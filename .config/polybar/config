@@ -3,14 +3,14 @@
 ######################
 
 [colors]
-background = #dd282828 
+background = #282828 
 background-alt = #504945
 foreground = #ebdbb2
 alert = #cc241d
 
-[bar/barra]
+[bar/root]
 width = 100%
-height = 27
+height = 32
 fixed-center = true
 monitor = ${env:MONITOR:HDMI-0}
 
@@ -28,50 +28,50 @@ font-2 = Font Awesome 5 Free Regular:pixelsize=13;1
 font-3 = Font Awesome 5 Free Solid:pixelsize=13;1
 font-4 = Font Awesome 5 Brands:pixelsize=13;1
 
-modules-left = jgmenu polynews updates-pacman-aurhelper
-modules-center = i3
-modules-right = openweathermap-simple memory cpu pulseaudio date powermenu
-
 cursor-click = pointer
 cursor-scroll = ns-resize
 
+[bar/barra1]
+inherit = bar/root
+width =  100%
+radius = 4
+border-left-size = 5%
+border-right-size = 5%
+border-top-size = 14
+
+modules-left = updates-pacman-aurhelper spotify
+modules-center = i3
+modules-right = openweathermap-simple memory cpu pulseaudio date
+
 [bar/barra2]
-width = 100%
-height = 27
-fixed-center = true
+inherit = bar/root
 bottom = true
-monitor = ${env:MONITOR:HDMI-0}
-
-background = ${colors.background}
-foreground = ${colors.foreground}
-
-line-size = 3
-line-color = #f00
-
-module-margin-right = 1
+width = 100%
+height = 30
+modules-left = network
+modules-center = xwindow
 
 tray-position = right
 
-font-0 = Fira Code:type=bold:pixelsize=12;1
-font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-font-2 = Font Awesome 5 Free Regular:pixelsize=13;1
-font-3 = Font Awesome 5 Free Solid:pixelsize=13;1
-font-4 = Font Awesome 5 Brands:pixelsize=13;1
-font-5 = Weather Icons:size=13;1
-
-modules-left = network
-modules-center = xwindow
-modules-right = 
-
-cursor-click = pointer
-cursor-scroll = ns-resize
+[module/spotify]
+type = custom/script
+interval = 1
+format-prefix = "  "
+format = <label>
+exec = python /home/gabriel/.config/polybar/scripts/spotify.py -f ' {artist} - {song} '
+format-underline = #b8bb26
+format-prefix-background = #b8bb26
+format-background = ${colors.background-alt}
+click-left = playerctl --player=spotify play-pause 
+click-right = playerctl --player=spotify next 
+click-middle = playerctl --player=spotify previous
 
 [module/network]
 type = internal/network
 interface = enp4s0
 interval = 1
 accumulate-stats = true
-label-connected = %downspeed% %upspeed%
+label-connected = " %downspeed% %upspeed%"
 label-disconnected = Não conectado
 label-connected-foreground = ${colors.foreground}
 label-disconnected-foreground = ${colors.foreground}
@@ -82,11 +82,11 @@ label = %title:0:30:...%
 
 [module/openweathermap-simple]
 type = custom/script
-exec = /home/user/.config/polybar/scripts/openweathermap-simple.sh
+exec = /home/gabriel/.config/polybar/scripts/openweathermap-simple.sh
 interval = 600
 format-prefix = "  "
 format-prefix-background = #689d6a
-format-background = #504945
+format-background = ${colors.background-alt} 
 format-underline = #689d6a
 
 [module/updates-pacman-aurhelper]
@@ -95,26 +95,10 @@ exec = ~/.config/polybar/scripts/updates-pacman-aurhelper.sh
 interval = 600
 format-prefix = "  "
 format-prefix-background = #d65d0e
-format-background = #504945
+format-background = ${colors.background-alt}
 format-underline = #d65d0e
+content = ${glyph.gleft}
 click-left = alacritty --hold -e paru -Qum && checkupdates
-
-[module/jgmenu]
-type = custom/text
-content = "  "
-click-left = "jgmenu_run >/dev/null 2>&1 &" 
-content-background = #b16286
-
-[module/polynews]
-type = custom/script
-exec = ~/.config/polybar/scripts/polynews.py
-interval = 900
-format-background = #504945
-format-prefix = "  "
-format-prefix-background = #458588
-format-underline = #458588
-click-left = xdg-open $(cat ~/.config/polybar/scripts/current_url.txt)
-label-maxlen = 35
 
 [module/i3]
 type = internal/i3
@@ -125,7 +109,7 @@ wrapping-scroll = false
 ws-icon-0 = 1;
 ws-icon-1 = 2;
 ws-icon-2 = 3;
-ws-icon-3 = 4;
+ws-icon-3 = 4;
 ws-icon-4 = 5;
 
 label-mode-foreground = ${colors.foreground}
@@ -141,6 +125,7 @@ label-focused-foreground = #d79921
 ; Unfocused
 label-unfocused = %icon%
 label-unfocused-padding = 1
+label-unfocused-background = ${colors.background}
 label-unfocused-foreground = ${colors.foreground}
 
 ; Visible
@@ -162,7 +147,7 @@ format-prefix = "  "
 format-prefix-foreground = ${colors.foreground}
 format-prefix-background = #83a598
 format-underline = #83a598
-format-background = #504945
+format-background = ${colors.background-alt}
 label = " %percentage:2%% "
 
 [module/memory]
@@ -172,7 +157,7 @@ format-prefix = "  "
 format-prefix-foreground = ${colors.foreground}
 format-prefix-background = #fb4934
 format-underline = #fb4934
-format-background = #504945
+format-background = ${colors.background-alt}
 label = " %percentage_used%% "
 
 [module/wlan]
@@ -218,18 +203,18 @@ type = internal/date
 interval = 1
 
 date = 
-date-alt = " %d/%m/%Y"
+;date-alt = " %d/%m/%Y"
 
-time = "%H:%M "
-time-alt = %H:%M:%S
+time = " %H:%M "
+;time-alt = %H:%M:%S
 
 format-prefix = "  "
 format-prefix-foreground = ${colors.foreground}
 format-prefix-background = #d3869b
 format-underline = #d3869b
-format-background = #504945
+format-background = ${colors.background-alt}
 
-label = %date% %time%
+label = %time%
 
 [module/pulseaudio]
 type = internal/pulseaudio
@@ -237,7 +222,7 @@ type = internal/pulseaudio
 format-volume = <ramp-volume><label-volume>
 label-volume = " %percentage%% "
 label-volume-foreground = ${root.foreground}
-label-volume-background = #504945
+label-volume-background = ${colors.background-alt}
 format-volume-background = #fabd2f
 format-volume-underline = #fabd2f
 
