@@ -39,7 +39,7 @@ border-left-size = 5%
 border-right-size = 5%
 border-top-size = 14
 
-modules-left = updates-pacman-aurhelper spotify
+modules-left = updates-pacman-aurhelper polynews
 modules-center = i3
 modules-right = openweathermap-simple memory cpu pulseaudio date
 
@@ -48,23 +48,52 @@ inherit = bar/root
 bottom = true
 width = 100%
 height = 30
-modules-left = network
-modules-center = xwindow
+modules-left = speedtest-do speedtest-up
+modules-center = cava 
 
 tray-position = right
 
-[module/spotify]
+[module/cava]
 type = custom/script
-interval = 1
-format-prefix = "  "
+tail = true
+exec = $HOME/.config/polybar/scripts/cava.sh
 format = <label>
-exec = python /home/gabriel/.config/polybar/scripts/spotify.py -f ' {artist} - {song} '
-format-underline = #b8bb26
-format-prefix-background = #b8bb26
+format-font = 5
+label = %output%
+
+[module/agenda]
+type = custom/script
+; Show the next event and forget cache automatically every 60 minutes
+exec = i3-agenda -c ~/.google_credentials.json -ttl 60
+; ; left click to launch Google Calendar
+click-left = xdg-open https://calendar.google.com/calendar/r/day
+; ; right click force update the cache, if for example you just added a new event
+click-right = notify-send " Sincronizando... " && i3-agenda -c ~/.google_credentials.json --update && notify-send -t 2000 " Sincronizado "
+interval = 60
+format-prefix = "  " 
+
+[module/speedtest-do]  
+type = custom/script  
+exec-if = hash speedtest
+exec = ~/.config/polybar/scripts/polybar-speedtest  
+interval = 50
+
+[module/speedtest-up]
+type = custom/script  
+exec-if = hash speedtest
+exec = ~/.config/polybar/scripts/polybar-speedtest --upload
+interval = 5
+
+[module/polynews]
+type = custom/script
+exec = ~/.config/polybar/scripts/polynews.py
+interval = 100
+format-prefix = "  "
+click-left = xdg-open $(cat ~/.config/polybar/scripts/current_url.txt)
+format-prefix-background = #98971a
+format-underline = #98971a
+label-maxlen = 30
 format-background = ${colors.background-alt}
-click-left = playerctl --player=spotify play-pause 
-click-right = playerctl --player=spotify next 
-click-middle = playerctl --player=spotify previous
 
 [module/network]
 type = internal/network
@@ -78,7 +107,12 @@ label-disconnected-foreground = ${colors.foreground}
 
 [module/xwindow]
 type = internal/xwindow
-label = %title:0:30:...%
+label = " %title:0:30:...% "
+label-background = ${colors.background-alt}
+format-underline = #98971a
+format-prefix = "  "
+label-maxlen = 25
+format-prefix-background = #98971a
 
 [module/openweathermap-simple]
 type = custom/script
@@ -265,7 +299,7 @@ screenchange-reload = true
 ;compositing-background = screen
 ;compositing-foreground = source
 ;compositing-border = over
-;pseudo-transparency = false
+pseudo-transparency = true
 
 [global/wm]
 margin-top = 5

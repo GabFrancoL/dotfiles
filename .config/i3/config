@@ -212,7 +212,13 @@ for_window [class="libreoffice-impress"] move to workspace $ws4
 exec_always --no-startup-id rclone mount Drive:Backup/ ~/Drive/
 
 # Polkit
-exec_always --no-startup-id /usr/bin/lxpolkit
+exec_always --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 # Autotiling
 exec_always --no-startup-id autotiling
+
+# Disable mouse acceleration
+exec_always --no-startup-id xinput --set-prop 13 'libinput Accel Speed' -1
+
+# Timeshift
+exec_always --no-startup-id timeshift
