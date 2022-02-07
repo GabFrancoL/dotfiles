@@ -4,12 +4,11 @@
 
 [colors]
 background = #282828 
-background-alt = #1d2021 
-;#504945
+background-alt = #504945
 foreground = #ebdbb2
 alert = #cc241d
 
-[bar/barra]
+[bar/root]
 width = 100%
 height = 32
 fixed-center = true
@@ -32,15 +31,27 @@ font-4 = Font Awesome 5 Brands:pixelsize=13;1
 cursor-click = pointer
 cursor-scroll = ns-resize
 
-padding-left = 1
+[bar/barra1]
+inherit = bar/root
+width =  100%
+radius = 4
+border-left-size = 5%
+border-right-size = 5%
+border-top-size = 14
 
-modules-left = i3 eth speedtest-do speedtest-up openweathermap-simple
-modules-center = cava
-modules-right = updates-pacman-aurhelper temperature memory cpu pulseaudio date
+modules-left = updates-pacman-aurhelper 
+modules-center = i3
+modules-right = openweathermap-simple memory cpu pulseaudio date
+
+[bar/barra2]
+inherit = bar/root
+bottom = true
+width = 100%
+height = 30
+modules-left = speedtest-do speedtest-up
+modules-center = cava 
 
 tray-position = right
-
-separator = |
 
 [module/cava]
 type = custom/script
@@ -96,19 +107,19 @@ format-prefix-background = #98971a
 type = custom/script
 exec = /home/gabriel/.config/polybar/scripts/openweathermap-simple.sh
 interval = 600
-format-prefix = " "
-;format-prefix-background = #689d6a
-;format-background = ${colors.background-alt} 
-;format-underline = #689d6a
+format-prefix = "  "
+format-prefix-background = #689d6a
+format-background = ${colors.background-alt} 
+format-underline = #689d6a
 
 [module/updates-pacman-aurhelper]
 type = custom/script
 exec = ~/.config/polybar/scripts/updates-pacman-aurhelper.sh
 interval = 600
 format-prefix = "  "
-;format-prefix-background = #d65d0e
-;format-background = ${colors.background-alt}
-;format-underline = #d65d0e
+format-prefix-background = #d65d0e
+format-background = ${colors.background-alt}
+format-underline = #d65d0e
 content = ${glyph.gleft}
 click-left = alacritty --hold -e paru -Qum && checkupdates
 
@@ -132,8 +143,7 @@ label-focused = %icon%
 label-focused-background = ${colors.background}
 ;label-focused-underline= ${colors.foreground}
 label-focused-padding = 1
-label-focused-foreground = #689d6a 
-;#d79921
+label-focused-foreground = #d79921
 
 ; Unfocused
 label-unfocused = %icon%
@@ -156,22 +166,22 @@ label-urgent-foreground = #ff5555
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = " "
+format-prefix = "  "
 format-prefix-foreground = ${colors.foreground}
-;format-prefix-background = #83a598
-;format-underline = #83a598
-;format-background = ${colors.background-alt}
-label = " %percentage:2%%"
+format-prefix-background = #83a598
+format-underline = #83a598
+format-background = ${colors.background-alt}
+label = " %percentage:2%% "
 
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = " "
+format-prefix = "  "
 format-prefix-foreground = ${colors.foreground}
-;format-prefix-background = #fb4934
-;format-underline = #fb4934
-;format-background = ${colors.background-alt}
-label = " %percentage_used%%"
+format-prefix-background = #fb4934
+format-underline = #fb4934
+format-background = ${colors.background-alt}
+label = " %percentage_used%% "
 
 [module/wlan]
 type = internal/network
@@ -200,8 +210,8 @@ type = internal/network
 interface = enp4s0
 interval = 3.0
 
-;format-connected-underline = #55aa55
-format-connected-prefix = "  "
+format-connected-underline = #55aa55
+format-connected-prefix = " "
 format-connected-prefix-foreground = ${colors.foreground}
 label-connected = %local_ip%
 
@@ -218,14 +228,14 @@ interval = 1
 date = 
 ;date-alt = " %d/%m/%Y"
 
-time = " %H:%M | "
+time = " %H:%M "
 ;time-alt = %H:%M:%S
 
-format-prefix = " "
+format-prefix = "  "
 format-prefix-foreground = ${colors.foreground}
-;format-prefix-background = #d3869b
-;format-underline = #d3869b
-;format-background = ${colors.background-alt}
+format-prefix-background = #d3869b
+format-underline = #d3869b
+format-background = ${colors.background-alt}
 
 label = %time%
 
@@ -233,21 +243,21 @@ label = %time%
 type = internal/pulseaudio
 
 format-volume = <ramp-volume><label-volume>
-label-volume = " %percentage%%"
+label-volume = " %percentage%% "
 label-volume-foreground = ${root.foreground}
-;label-volume-background = ${colors.background-alt}
-;format-volume-background = #fabd2f
-;format-volume-underline = #fabd2f
+label-volume-background = ${colors.background-alt}
+format-volume-background = #fabd2f
+format-volume-underline = #fabd2f
 
 label-muted = "    "
 ;label-muted-foreground = #8be9fd
-;label-muted-background = #ffb86c
+label-muted-background = #ffb86c
 
 click-right = pavucontrol
 
-ramp-volume-0 = " "
-ramp-volume-1 = " "
-ramp-volume-2 = " "
+ramp-volume-0 = "  "
+ramp-volume-1 = "  "
+ramp-volume-2 = "  "
 
 [module/powermenu]
 type = custom/menu
@@ -271,21 +281,6 @@ menu-0-0-exec = systemctl reboot
 menu-0-1-background = #504945
 menu-0-1 = "Desligar "
 menu-0-1-exec = systemctl poweroff
-
-[module/temperature]
-type = internal/temperature
-interval = 2
-thermal-zone = 0
-hwmon-path = /sys/class/hwmon/hwmon0/temp1_input 
-base-temperature = 30
-warn-temperature = 70
-format = <ramp> <label>
-format-warn = <ramp> <label-warn>
-label = " %temperature-c%"
-label-warn = " %temperature-c%"
-ramp-0 = " "
-ramp-1 = " "
-ramp-2 = " "
 
 [settings]
 screenchange-reload = true

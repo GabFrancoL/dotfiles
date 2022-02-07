@@ -33,9 +33,8 @@ do
 
 	# run cava in the background
 	cava -p $config_file &
-
+	
 	# reading data from fifo
 	while read -r cmd; do
 		    echo $cmd | sed $dict
 	    done < $pipe
-

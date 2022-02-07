@@ -44,7 +44,7 @@ get_icon() {
 KEY="5ccc7773e6835194124471c1c88e65e6" #add your openweather api key
 CITY="Viçosa,BR" #add your city followed by country
 UNITS="metric"
-SYMBOL="°"
+SYMBOL="°C"
 
 API="https://api.openweathermap.org/data/2.5"
 
@@ -71,5 +71,5 @@ if [ -n "$weather" ]; then
     weather_temp=$(echo "$weather" | jq ".main.temp" | cut -d "." -f 1)
     weather_icon=$(echo "$weather" | jq -r ".weather[0].icon")
 
-    echo " $(get_icon "$weather_icon")" "$weather_temp$SYMBOL "
+    echo " $(get_icon "$weather_icon")" "$weather_temp$SYMBOL"
 fi

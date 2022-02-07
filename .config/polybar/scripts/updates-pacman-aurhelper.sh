@@ -16,10 +16,10 @@ fi
 updates=$((updates_arch + updates_aur))
 
 if [ "$updates" == 0 ]; then
-	echo " Sistema atualizado "
+	echo " Sistema atualizado"
 elif [ "$updates" == 1 ]; then
-	echo " $updates pacote "	
+	echo " $updates pacote"	
 else 
-	echo " $updates pacotes "
+	echo " $updates pacotes"
 fi
 

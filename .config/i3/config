@@ -15,7 +15,7 @@ exec --no-startup-id dex --autostart --environment i3
 # exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
 # Betterlockscreen
-bindsym $mod+Shift+x exec betterlockscreen -l dim
+bindsym $mod+Shift+x exec betterlockscreen -l dimblur
 
 # NetworkManager applet
 exec_always --no-startup-id nm-applet
@@ -199,6 +199,7 @@ for_window [class="firefox"] move to workspace $ws2
 for_window [class="Thunderbird"] move to workspace $ws2
 for_window [class="Lutris"] move to workspace $ws3
 for_window [class="Steam"] move to workspace $ws3
+for_window [class="heroic"] move to workspace $ws3
 for_window [class="discord"] move to workspace $ws3
 for_window [class="libreoffice"] move to workspace $ws4
 for_window [class="libreoffice-writer"] move to workspace $ws4
@@ -218,7 +219,7 @@ exec_always --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-ag
 exec_always --no-startup-id autotiling
 
 # Disable mouse acceleration
-exec_always --no-startup-id xinput --set-prop 13 'libinput Accel Speed' -1
+exec_always --no-startup-id xinput --set-prop 14 'libinput Accel Speed' -1
 
 # Timeshift
 exec_always --no-startup-id timeshift
