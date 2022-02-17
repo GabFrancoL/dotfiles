@@ -3,11 +3,11 @@
 ######################
 
 [colors]
-background = #282828 
-background-alt = #1d2021 
+background = #1c2424 
+;background-alt = #1d2021 
 ;#504945
-foreground = #ebdbb2
-alert = #cc241d
+foreground = #bccec8
+alert = #544c44
 
 [bar/barra]
 width = 100%
@@ -86,7 +86,7 @@ label-maxlen = 25
 
 [module/openweathermap-simple]
 type = custom/script
-exec = /home/gabriel/.config/polybar/scripts/openweathermap-simple.sh
+exec = /home/$USER/.config/polybar/scripts/openweathermap-simple.sh
 interval = 600
 ;format-prefix = " "
 ;format-prefix-background = #689d6a
@@ -124,7 +124,7 @@ label-focused = %icon%
 label-focused-background = ${colors.background}
 ;label-focused-underline= ${colors.foreground}
 label-focused-padding = 1
-label-focused-foreground = #689d6a 
+label-focused-foreground = #eb6c64
 ;#d79921
 
 ; Unfocused

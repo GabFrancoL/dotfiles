@@ -37,7 +37,7 @@ bindsym $mod+Return exec alacritty
 bindsym $mod+Shift+q kill
 
 # Start dmenu
-bindsym $mod+d exec --no-startup-id dmenu_run -b -fn 'Fira Code 11' -nb '#282828' -nf '#ebdbb2' -sf '#ebdbb2' -sb '#504945'
+bindsym $mod+d exec --no-startup-id dmenu_run -b -fn 'Fira Code 11' -nb '#0c1011' -nf '#bccec8' -sf '#bccec8' -sb '#833f3d'
 
 # Start rofi
 # bindsym $mod+d exec rofi -show drun
@@ -158,7 +158,7 @@ bindsym $mod+r mode "Redimensionar"
 exec_always --no-startup-id bash ~/.config/polybar/launch.sh
 
 # Compositor
-exec_always --no-startup-id picom --config /home/gabriel/.config/picom/picom.conf --experimental-backends
+exec_always --no-startup-id picom --config /home/$USER/.config/picom/picom.conf --experimental-backends
 
 # Screen DPI
 exec_always --no-startup-id xrandr --rate 60 --dpi 96
@@ -176,7 +176,7 @@ border_radius 4
 
 # Apps
 bindsym $mod+Shift+w exec firefox
-bindsym $mod+Shift+e exec pcmanfm 
+bindsym $mod+Shift+e exec nemo 
 bindsym Print exec flameshot gui
 bindsym $mod+Shift+p exec firefox --private-window
 
@@ -184,10 +184,10 @@ bindsym $mod+Shift+p exec firefox --private-window
 exec_always --no-startup-id nitrogen --restore
 
 # Border colors
-set $bgc #928374
-set $ibg #282828
-set $txt #ebdbb2
-set $ubg #cc241d
+set $bgc #EB6C64
+set $ibg #1C2424
+set $txt #bccec8
+set $ubg #544C44
 # class                 bord back text indi
 client.focused          $bgc $bgc $txt $bgc
 client.focused_inactive $ibg $ibg $txt $ibg
@@ -200,7 +200,7 @@ for_window [class="Lutris"] move to workspace $ws3
 for_window [class="Steam"] move to workspace $ws3
 for_window [class="heroic"] move to workspace $ws3
 for_window [class="discord"] move to workspace $ws3
-for_window [class="Evolution"] move to workspace $ws4
+for_window [class="geary"] move to workspace $ws4
 for_window [class="libreoffice"] move to workspace $ws4
 for_window [class="libreoffice-writer"] move to workspace $ws4
 for_window [class="libreoffice-calc"] move to workspace $ws4
@@ -214,9 +214,6 @@ exec_always --no-startup-id rclone mount Drive:Backup/ ~/Drive/
 
 # Polkit
 exec_always --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-
-# Autotiling
-exec_always --no-startup-id autotiling
 
 # Disable mouse acceleration
 exec_always --no-startup-id xinput --set-prop $(xinput | sed '/USB OPTICAL MOUSE/s/.*id=\([0-9]*\).*/\1/;t;d') 'libinput Accel Speed' -1
