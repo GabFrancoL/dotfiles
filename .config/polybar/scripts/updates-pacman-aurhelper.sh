@@ -15,11 +15,4 @@ fi
 
 updates=$((updates_arch + updates_aur))
 
-if [ "$updates" == 0 ]; then
-	echo " Sistema atualizado"
-elif [ "$updates" == 1 ]; then
-	echo " $updates pacote"	
-else 
-	echo " $updates pacotes"
-fi
-
+echo " $updates pkg(s)"
