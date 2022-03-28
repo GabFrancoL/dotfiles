@@ -26,6 +26,7 @@ font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = Font Awesome 6 Free Regular:pixelsize=13;1
 font-3 = Font Awesome 6 Free Solid:pixelsize=13;1
 font-4 = Font Awesome 6 Brands:pixelsize=13;1
+font-5 = Noto Sans CJK JP Medium:pixelsize=13;1
 
 radius = 15
 border-size = 3
